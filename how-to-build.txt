@@ -1,0 +1,2 @@
+# Example of how to build .c file
+gcc blink.c -o blink -l wiringPi
