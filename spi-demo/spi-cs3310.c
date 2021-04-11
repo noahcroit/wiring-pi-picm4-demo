@@ -1,20 +1,21 @@
 /******************************************************************************
-spitest.cpp
-Raspberry Pi SPI interface demo
+spi-cs3310.c
+Raspberry Pi SPI interface demo with cirrus logic CS3310
 
 Hardware connections:
 
-The board was connected as follows:
-(Raspberry Pi)(Serial 7 Segment)
-GND  -> GND
-3.3V -> Vcc
-CE1  -> SS (Shift Select)
-SCK  -> SCK 
-MOSI -> SDI
-MISO -> SDO
+The GPIO of raspberry-pi was connected as follows:
+RaspberryPi   |   CS3310 Chip
+GND          -> GND
+3.3V         -> Vcc
+GPIO5        -> SS (Shift Select)
+GPIO11(SCLK) -> SCK 
+GPIO10(MOSI) -> SDI
+GPIO9 (MISO) -> SDO
+
 
 To build this file, I use the command:
->  g++ spitest.cpp -lwiringPi
+>  gcc spi-cs3310.c -lwiringPi
 
 Then to run it, first the spi kernel module needs to be loaded.  This can be 
 done using the GPIO utility.
@@ -63,7 +64,8 @@ int main()
     
     uint8_t data_buf[10];
     uint8_t data_r, data_l;
-
+    
+    // test gain value in dB
     float test_gain[5] = {0.0, 3.5, 6.0, 12.0, 20.0};
 
     while(1)
